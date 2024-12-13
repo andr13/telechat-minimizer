@@ -18,9 +18,13 @@ TCM (**TeleChat Minimizer**) is a Python utility designed to minimize Telegram p
 
 ---
 
-## Installation
+## Performance Comparison
 
-Just clone the repository and make sure you have Python 3.12 or higher.
+### 1. Token Efficiency
+![Token Efficiency](assets/1.png)
+
+### 2. Semantic Retention
+![Semantic Retention](assets/2.png)
 
 ---
 
@@ -52,17 +56,6 @@ python3 telechat-minimizer.py chat.json minimized_output.txt
 ```bash
 python3 telechat-minimizer.py chat.json minimized_output.txt -a
 ```
-
----
-
-
-## Performance Comparison
-
-### 1. Token Efficiency
-![Token Efficiency](assets/1.png)
-
-### 2. Semantic Retention
-![Semantic Retention](assets/2.png)
 
 ---
 
