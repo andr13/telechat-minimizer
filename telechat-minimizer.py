@@ -1,9 +1,26 @@
+import argparse
 import json
 import logging
-import argparse
 
 # Configure logging
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def remove_formatting(text):
+    """Removes Telegram formatting from text."""
+
+    if isinstance(text, list):
+        cleaned_text = ""
+        for item in text:
+            if isinstance(item, dict):
+                if 'text' in item:
+                    cleaned_text += item['text']
+            elif isinstance(item, str):
+                cleaned_text += item
+        return cleaned_text
+    elif isinstance(text, str):
+      return text
+    else:
+        return ""
 
 def minimize_telegram_json(input_file, output_file, no_media=False, no_reactions=False):
     try:
@@ -68,7 +85,7 @@ def minimize_telegram_json(input_file, output_file, no_media=False, no_reactions
                    minified_msg.append('')
 
                 minified_msg.append(msg.get('date', ''))
-                text = msg.get('text', '')
+                text = remove_formatting(msg.get('text', ''))
                 if not text and not no_media:
                    if msg.get('photo'):
                         text = '[photo]'
@@ -114,6 +131,5 @@ This script simplifies exported Telegram JSON files by removing non-essential el
 
     no_media = args.no_media or args.aggressive
     no_reactions = args.no_reactions or args.aggressive
-
 
     minimize_telegram_json(args.input_file, args.output_file, no_media, no_reactions)
